@@ -25,7 +25,8 @@
 		"storage",
 		"http://*/*",
 		"https://*/*",
-		"cookies"
+		"cookies",
+        "browsingData"
 	],
     "homepage_url": "https://www.kptom.com",
     "omnibox": { 

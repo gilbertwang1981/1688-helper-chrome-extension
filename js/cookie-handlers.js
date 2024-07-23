@@ -19,27 +19,14 @@ document.addEventListener('DOMContentLoaded', function() {
     var productTitle = ''
 
     cleanButton.addEventListener('click', function(){
-      chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-        var cookieStoreId = tabs[0].cookieStoreId;
-      
-        chrome.cookies.getAll({
-          url: "http://www.1688.com", 
-          storeId: cookieStoreId
-        }, function(cookies) {
-          cookies.forEach(function(cookie) {
-            chrome.cookies.remove({
-              url: "http://www.1688.com",
-              name: cookie.name,
-              storeId: cookieStoreId
-            });
-          });
+        chrome.browsingData.removeCookies({}, function(){
+          cookieList.textContent = '已经删除了所有Cookie......';
         });
 
         document.getElementById('userName').value = '';
 
         cookieList.textContent = 'Cookie清理完成.........'
-      });
-    })
+    });
 
     detailButton.addEventListener('click', function(){
         cookieList.textContent = ''
