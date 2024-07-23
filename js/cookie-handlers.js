@@ -83,18 +83,30 @@ document.addEventListener('DOMContentLoaded', function() {
                 result += '商品标题：'+ obj.title + '\n';
                 result += '商品价格：'+ obj.price + '\n';
                 result += '起批量：'+ obj.start + '\n';
-                result += '商品属性：\n';
+                result += '跨境属性:\n';
+                cross = obj.pCross;
+                for (c in cross) {
+                  result += '\t' + c + ':' + cross[c] + '\n';
+                }
 
-                productSummary = '参考价格:' + obj.price + ' 起批量:' + obj.start;
+                result += '商品属性：\n';
                 
                 attrs = obj.pAttrs;
                 for (attr in attrs) {
                   result += '\t' + attr + ':' + attrs[attr] + '\n';
                 }
 
+                productSummary = '参考价格:' + obj.price + ' 起批量:' + obj.start;
+
                 cookieList.textContent = result;
 
                 productTitle = obj.title;
+
+                var imageContent = '<br><h4>商品图列表</h4><br>';
+                for (image in obj.images) {
+                  imageContent += "<img width='620px' height='100%' src='" + obj.images[image] + "'><br>"
+                }
+                document.getElementById('image_list').innerHTML = imageContent;
               })
               .catch(error => cookieList.textContent = 'Error:' + error); 
         });
