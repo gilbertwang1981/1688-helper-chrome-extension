@@ -14,6 +14,7 @@ document.addEventListener('DOMContentLoaded', function() {
     var copyButton = document.getElementById('copy');
     var detailButton = document.getElementById('detail');
     var cleanButton = document.getElementById('clean');
+
     var jsonString = ''
     var offerId = ''
     var productTitle = ''
@@ -21,9 +22,7 @@ document.addEventListener('DOMContentLoaded', function() {
     var masterPic = '';
 
     cleanButton.addEventListener('click', function(){
-        chrome.browsingData.removeCookies({}, function(){
-          cookieList.textContent = '已经删除了所有Cookie......';
-        });
+        chrome.browsingData.removeCookies({}, function(){});
 
         document.getElementById('userName').value = '';
 
@@ -31,8 +30,6 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     detailButton.addEventListener('click', function(){
-        cookieList.textContent = ''
-
         chrome.tabs.getSelected(null, function(tab) {
             var url = tab.url;
 
@@ -152,8 +149,6 @@ document.addEventListener('DOMContentLoaded', function() {
         .then(response => { response
         })
         .catch(error => error); 
-
-        cookieList.textContent = '';
     });
   
     getButton.addEventListener('click', function() {
