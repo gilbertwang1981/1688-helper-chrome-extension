@@ -17,6 +17,7 @@ document.addEventListener('DOMContentLoaded', function() {
     var jsonString = ''
     var offerId = ''
     var productTitle = ''
+    var productSummary = ''
 
     cleanButton.addEventListener('click', function(){
         chrome.browsingData.removeCookies({}, function(){
@@ -83,6 +84,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 result += '商品价格：'+ obj.price + '\n';
                 result += '起批量：'+ obj.start + '\n';
                 result += '商品属性：\n';
+
+                productSummary = '参考价格:' + obj.price + ' 起批量:' + obj.start;
                 
                 attrs = obj.pAttrs;
                 for (attr in attrs) {
@@ -111,8 +114,8 @@ document.addEventListener('DOMContentLoaded', function() {
             "news": {
               "articles" : [
                   {
-                      "title" : "商品详情页抓取结果",
-                      "description" : productTitle,
+                      "title" : productTitle,
+                      "description" : productSummary,
                       "url" : "https://detail.1688.com/offer/" + offerId + ".html", 
                       "picurl" : "https://pic.rmb.bdstatic.com/bjh/news/75d17a5b01851ee3943bcbb37b7c3bd8.png"
                   }
