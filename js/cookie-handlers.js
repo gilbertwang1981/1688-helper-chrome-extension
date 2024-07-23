@@ -18,6 +18,7 @@ document.addEventListener('DOMContentLoaded', function() {
     var offerId = ''
     var productTitle = ''
     var productSummary = ''
+    var masterPic = '';
 
     cleanButton.addEventListener('click', function(){
         chrome.browsingData.removeCookies({}, function(){
@@ -103,6 +104,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 productTitle = obj.title;
 
                 var imageContent = '<br><h4>商品图列表</h4><br>';
+                masterPic = obj.images[0]
                 for (image in obj.images) {
                   imageContent += "<img width='620px' height='100%' src='" + obj.images[image] + "'><br>"
                 }
@@ -129,7 +131,7 @@ document.addEventListener('DOMContentLoaded', function() {
                       "title" : productTitle,
                       "description" : productSummary,
                       "url" : "https://detail.1688.com/offer/" + offerId + ".html", 
-                      "picurl" : "https://pic.rmb.bdstatic.com/bjh/news/75d17a5b01851ee3943bcbb37b7c3bd8.png"
+                      "picurl" : masterPic
                   }
               ]
             }
