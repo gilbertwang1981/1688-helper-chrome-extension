@@ -100,16 +100,18 @@ document.addEventListener('DOMContentLoaded', function() {
 
                 productTitle = obj.title;
 
-                var imageContent = '<br><h4>商品图列表</h4><br>';
+                var imageContent = '';
                 masterPic = obj.images[0]
                 for (image in obj.images) {
-                  imageContent += "<img width='620px' height='100%' src='" + obj.images[image] + "'><br>"
+                  imageContent += "<img width='580px' height='100%' src='" + obj.images[image] + "'><br>"
                 }
                 document.getElementById('image_list').innerHTML = imageContent;
+                
+                document.getElementById('video').innerHTML = '<video controls muted="muted" type="video/mp4" width="580px" height="100%" src="' + obj.video + '">';
               })
               .catch(error => cookieList.textContent = 'Error:' + error); 
         });
-    });
+      });
 
     copyButton.addEventListener('click', function(){
         copyTextToClipboard(cookieList.textContent);
