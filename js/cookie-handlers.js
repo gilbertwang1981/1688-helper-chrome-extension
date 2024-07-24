@@ -77,26 +77,44 @@ document.addEventListener('DOMContentLoaded', function() {
               })
               .then(text => {
                 var obj = JSON.parse(text);
-                var result = '';
-                result += '商品标题：'+ obj.title + '\n';
-                result += '商品价格：'+ obj.price + '\n';
-                result += '起批量：'+ obj.start + '\n';
-                result += '跨境属性:\n';
+                var result = '<b><h3>基础信息</h3></b>';
+                result += '<b>商品标题:</b>'+ obj.title + '<br>';
+                result += '<b>商品价格:</b>'+ obj.price + '<br>';
+                result += '<b>起批量:</b>'+ obj.start + '<br><br>';
+
+                result += '<b><h3>属性信息</h3></b>';
                 cross = obj.pCross;
+                result += '<table border=0><tr><th>商品属性</th><th>商品属性值</th></tr>'
                 for (c in cross) {
-                  result += '\t' + c + ':' + cross[c] + '\n';
+                  result += '<tr><td>' + c + '</td><td>' + cross[c] + '</td></tr>';
                 }
 
-                result += '商品属性：\n';
-                
                 attrs = obj.pAttrs;
                 for (attr in attrs) {
-                  result += '\t' + attr + ':' + attrs[attr] + '\n';
+                  result += '<tr><td>' + attr + '</td><td>' + attrs[attr] + '</td></tr>';
                 }
+
+                result += '</table>';
+
+                result += '<br><b><h3>颜色信息</h3></b>';
+                result += '<table border=0><tr><th>缩略图</th><th>文本描述</th></tr>'
+                for (color in obj.colors) {
+                  result += '<tr><td><img width="50px" height="50px" src="' + obj.colors[color].url + '"></td><td>' + obj.colors[color].title + '</td></tr>';
+                }
+
+                result += '</table>';
+
+                result += '<br><b><h3>尺码信息</h3></b>';
+                result += '<table border=0><tr><th>SKU</th><th>价格</th><th>库存</th></tr>';
+                for (sku in obj.skus) {
+                  result += '<tr><td>' + obj.skus[sku].name + '</td><td>' + obj.skus[sku].price + '</td><td>' + obj.skus[sku].stock + '</td></tr>';
+                }
+
+                result += '</table>'
 
                 productSummary = '参考价格:' + obj.price + ' 起批量:' + obj.start;
 
-                cookieList.textContent = result;
+                cookieList.innerHTML = result;
 
                 productTitle = obj.title;
 
