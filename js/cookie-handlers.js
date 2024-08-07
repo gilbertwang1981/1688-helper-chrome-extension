@@ -179,7 +179,7 @@ document.addEventListener('DOMContentLoaded', function() {
         chrome.cookies.getAll({url: url}, function(cookies) {
           cookies.map((c) => {
             if (c.name == '__cn_logon_id__') {
-                document.getElementById('userName').value = c.value;
+                document.getElementById('userName').value = decodeURI(c.value);
                 flag = 1;
             }
           });
